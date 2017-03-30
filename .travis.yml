@@ -3,5 +3,5 @@ services:
 
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - docker build --tag multiphysics/openfoam-cxx . && docker push multiphysics/openfoam-cxx
+  - docker build --tag multiphysics/openfoam-ccx . && docker push multiphysics/openfoam-ccx
   - docker images
