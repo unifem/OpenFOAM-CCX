@@ -2,12 +2,12 @@
 # environment with Ubuntu and LXDE.
 #
 # The built image can be found at:
-#   https://hub.docker.com/r/multiphysics/openfoam-cxx
+#   https://hub.docker.com/r/unifem/openfoam-cxx
 #
 # Authors:
 # Xiangmin Jiao <xmjiao@gmail.com>
 
-FROM x11vnc/ubuntu:latest
+FROM unifem/desktop-base:latest
 LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 
 USER root
@@ -25,28 +25,6 @@ RUN add-apt-repository http://dl.openfoam.org/ubuntu && \
         gmsh && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-########################################################
-# Customization for user and location
-########################################################
-
-ENV MP_USER=multiphysics
-
-# Set up user so that we do not run as root
-RUN mv /home/$DOCKER_USER /home/$MP_USER && \
-    useradd -m -s /bin/bash -G sudo,docker_env $MP_USER && \
-    echo "$MP_USER:docker" | chpasswd && \
-    echo "$MP_USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    sed -i "s/$DOCKER_USER/$MP_USER/" /home/$MP_USER/.config/pcmanfm/LXDE/desktop-items-0.conf && \
-    echo "source /opt/openfoam4/etc/bashrc" >> /home/$MP_USER/.bashrc && \
-    chown -R $MP_USER:$MP_USER /home/$MP_USER
-
-ENV DOCKER_USER=$MP_USER \
-    DOCKER_GROUP=$MP_USER \
-    DOCKER_HOME=/home/$MP_USER \
-    HOME=/home/$MP_USER
-
 WORKDIR $DOCKER_HOME
 
 USER root
-ENTRYPOINT ["/sbin/my_init","--quiet","--","/sbin/setuser","multiphysics","/bin/bash","-l","-c"]
-CMD ["/bin/bash","-l","-i"]

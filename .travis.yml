@@ -3,5 +3,5 @@ services:
 
 script:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - docker build --tag multiphysics/openfoam-ccx . && docker push multiphysics/openfoam-ccx
+  - docker build --tag unifem/openfoam-ccx . && docker push unifem/openfoam-ccx && curl -X POST https://registry.hub.docker.com/u/unifem/openfoam-ccx/trigger/$DOCKER_TOKEN/
   - docker images

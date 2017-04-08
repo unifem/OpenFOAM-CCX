@@ -3,7 +3,7 @@
 This Docker image is for experimenting OpenFOAM and Calculix for
 fluid-structure interaction.
 
-[![Build Status](https://travis-ci.org/MultiPhysicsLab/OpenFOAM-CCX.svg?branch=master)](https://travis-ci.org/MultiPhysicsLab/OpenFOAM-CCX) [![Docker Repository on Quay](https://quay.io/repository/multiphysics/openfoam-cxx/status "Docker Repository on Quay")](https://quay.io/repository/multiphysics/openfoam-cxx)
+[![Build Status](https://travis-ci.org/unifem/OpenFOAM-CCX.svg?branch=master)](https://travis-ci.org/unifem/OpenFOAM-CCX) [![Docker Image](https://images.microbadger.com/badges/image/unifem/openfoam-ccx.svg)](https://microbadger.com/images/unifem/openfoam-ccx)
 
 ### About [OpenFOAM](https://openfoam.org/)
 
