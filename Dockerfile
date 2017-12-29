@@ -21,11 +21,17 @@ RUN add-apt-repository http://dl.openfoam.org/ubuntu && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
         openfoam5 \
+        paraviewopenfoam54 \
 	freecad \
         calculix-ccx \
         gmsh && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+USER $DOCKER_USER
 WORKDIR $DOCKER_HOME
+
+# Source configuration for bash
+# https://github.com/OpenFOAM/OpenFOAM-dev/tree/version-5.0/etc
+RUN echo "source /opt/openfoam5/etc/bashrc" >> $DOCKER_HOME/.profile
 
 USER root
