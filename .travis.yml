@@ -6,7 +6,7 @@ sudo: false
 
 env:
   global:
-    - BASE=unifem/mapper-desktop:latest
+    - BASE=unifem/desktop:latest
 
 before_script:
   - docker --version
