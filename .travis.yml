@@ -1,7 +1,19 @@
-services:
-  - docker
+os: linux
+dist: trusty
+language: python
+services: docker
+sudo: false
+
+env:
+  global:
+    - BASE=unifem/mapper-desktop:latest
+
+before_script:
+  - docker --version
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
+  - docker pull $BASE
 
 script:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - docker build --tag unifem/openfoam-ccx . && docker push unifem/openfoam-ccx && curl -X POST https://registry.hub.docker.com/u/unifem/openfoam-ccx/trigger/$DOCKER_TOKEN/
+  - 'docker build --tag unifem/openfoam-ccx . && 
+     docker push unifem/openfoam-ccx'
   - docker images
