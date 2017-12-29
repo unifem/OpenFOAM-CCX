@@ -13,13 +13,14 @@ LABEL maintainer "Xiangmin Jiao <xmjiao@gmail.com>"
 USER root
 WORKDIR /tmp
 
-# Install OpenFOAM, Calculix, along with FreeCAD and Gmsh
+# Install OpenFOAM 5.0 (https://openfoam.org/download/5-0-ubuntu/), 
+# Calculix, along with FreeCAD and Gmsh
 RUN add-apt-repository http://dl.openfoam.org/ubuntu && \
     sh -c "curl -s http://dl.openfoam.org/gpg.key | apt-key add -" && \
     add-apt-repository ppa:freecad-maintainers/freecad-stable && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-        openfoam4 \
+        openfoam5 \
 	freecad \
         calculix-ccx \
         gmsh && \
