@@ -1,19 +1,10 @@
 os: linux
-dist: trusty
 language: python
 services: docker
-sudo: false
-
-env:
-  global:
-    - BASE=unifem/mapper-desktop:latest
 
 before_script:
-  - docker --version
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - docker pull $BASE
+  - git clone --depth=1 https://$GIT_TOKEN@github.com/xmjiao/ci-util.git 2> /dev/null
 
 script:
-  - 'docker build --tag unifem/openfoam-ccx . && 
-     docker push unifem/openfoam-ccx'
-  - docker images
+  - './ci-util/build-docker.sh &&
+    ./ci-util/trigger-via-api.sh'
