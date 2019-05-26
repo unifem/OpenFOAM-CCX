@@ -1,7 +1,10 @@
-services:
-  - docker
+os: linux
+language: python
+services: docker
+
+before_script:
+  - git clone --depth=1 https://$GIT_TOKEN@github.com/xmjiao/ci-util.git 2> /dev/null
 
 script:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_USERPASS"
-  - docker build --tag unifem/openfoam-ccx . && docker push unifem/openfoam-ccx && curl -X POST https://registry.hub.docker.com/u/unifem/openfoam-ccx/trigger/$DOCKER_TOKEN/
-  - docker images
+  - './ci-util/build-docker.sh &&
+    ./ci-util/trigger-via-api.sh'
